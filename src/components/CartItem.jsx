@@ -11,7 +11,9 @@ export default function CartItem({ cart = {} }) {
         className="cart-item-image square mr-4 size-24 rounded-md object-contain"
       />
       <div className="cart-item-details flex-1">
-        <h4 className="cart-item-name text-sm font-semibold">{title}</h4>
+        <h4 className="cart-item-name line-clamp-2 overflow-hidden text-sm font-semibold">
+          {title}
+        </h4>
         <p className="cart-item-price mb-5 mt-2 text-sm">{`$${price}`}</p>
         <div className="quantity flex justify-between">
           <div className="flex gap-2">
