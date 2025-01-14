@@ -6,15 +6,19 @@ import "./cart.css";
 export default function Cart() {
   const [showCart, setShowCart] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems);
 
   return (
     <div className="flex flex-col">
-      <button
-        onClick={() => setShowCart((show) => !show)}
-        className="absolute right-8 top-24 z-10 ml-auto mt-1 h-10 w-36 rounded-full bg-yellow-400 px-4 py-2.5 text-center text-sm font-medium text-white drop-shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-300"
-      >
-        Cart
-      </button>
+      {cartItems.length !== 0 ? (
+        <button
+          onClick={() => setShowCart((show) => !show)}
+          className="absolute right-8 top-24 z-10 ml-auto mt-1 flex h-10 w-36 items-center justify-center rounded-full bg-yellow-400 px-4 py-2.5 text-center text-lg font-medium text-black drop-shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-300"
+        >
+          <p className="mr-4">Cart</p>
+          <p>{cartItems.length}</p>
+        </button>
+      ) : null}
       {showCart && (
         <div className="cart custom-scrollbar absolute right-8 top-44 z-20 h-[37rem] w-96 overflow-y-auto rounded-lg bg-slate-950 p-6 shadow-2xl shadow-black">
           <h2 className="mb-6 text-2xl font-semibold">Your Cart</h2>

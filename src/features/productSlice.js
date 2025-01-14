@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   products: [],
   isLoading: false,
@@ -5,16 +7,29 @@ const initialState = {
   catoegory: "",
 };
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "product/get":
-      return { ...state, products: action.payload, isLoading: false };
-    case "product/loading":
-      return { ...state, isLoading: true };
-    default:
-      return state;
-  }
-}
+const productSlice = createSlice({
+  name: "product",
+  initialState,
+  reducers: {
+    get(state, action) {
+      state.products = action.payload;
+      state.isLoading = false;
+    },
+  },
+});
+
+//get: {
+// prepare(amount, purpose) {
+//     return {
+//       payload: {
+//         amount,
+//         purpose
+//       }
+//     }
+//   }
+// }
+
+export default productSlice.reducer;
 
 export function getProducts() {
   return async (dispatch, getState) => {
