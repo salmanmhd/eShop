@@ -34,7 +34,7 @@ export default productSlice.reducer;
 export function getProducts() {
   return async (dispatch, getState) => {
     dispatch({ type: "product/loading" });
-    const res = await fetch("https://fakestoreapi.com/products?limit=20");
+    const res = await fetch("https://fakestoreapi.com/products?limit=100");
     const data = await res.json();
     dispatch({ type: "product/get", payload: data });
   };
