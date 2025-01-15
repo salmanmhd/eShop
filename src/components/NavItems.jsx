@@ -6,6 +6,7 @@ import { getCategories } from "../features/productSlice";
 export default function NavItems({ setProducts }) {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const allProducts = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ export default function NavItems({ setProducts }) {
   }
 
   function handleChangeCategory(e) {
-    dispatch(getCategories(e.target.value));
+    const category = e.target.value;
+    dispatch(getCategories(category));
+    setSelectedCategory(category);
   }
 
   return (
@@ -65,14 +68,15 @@ export default function NavItems({ setProducts }) {
       <div className="flex items-center gap-4">
         <label className="text-white">Categories</label>
         <select
+          value={selectedCategory || "default"}
           onChange={(e) => handleChangeCategory(e)}
-          className="h-8 w-40 rounded-lg bg-gray-700 text-center text-white"
+          className="h-10 w-48 rounded-lg bg-gray-700 px-3 py-2 pl-2 text-left text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option disabled value="default">
             Choose category
           </option>
           {categories.map((category, i) => (
-            <option className="" key={i} value={category}>
+            <option key={i} value={category} className="bg-gray-700 text-white">
               {category}
             </option>
           ))}
