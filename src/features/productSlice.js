@@ -18,17 +18,6 @@ const productSlice = createSlice({
   },
 });
 
-//get: {
-// prepare(amount, purpose) {
-//     return {
-//       payload: {
-//         amount,
-//         purpose
-//       }
-//     }
-//   }
-// }
-
 export default productSlice.reducer;
 
 export function getProducts() {
