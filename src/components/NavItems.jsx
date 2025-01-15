@@ -1,12 +1,14 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../features/productSlice";
 
 export default function NavItems({ setProducts }) {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState([]);
 
   const allProducts = useSelector((state) => state.product.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchCategories() {
@@ -35,6 +37,11 @@ export default function NavItems({ setProducts }) {
     if (!query) return;
     console.log("searchng");
   }
+
+  function handleChangeCategory(e) {
+    dispatch(getCategories(e.target.value));
+  }
+
   return (
     <div className="nav-items mb-6 flex items-center justify-between">
       <h2 className="text-2xl font-semibold text-white">Products</h2>
@@ -57,7 +64,10 @@ export default function NavItems({ setProducts }) {
       </form>
       <div className="flex items-center gap-4">
         <label className="text-white">Categories</label>
-        <select className="h-8 w-40 rounded-lg bg-gray-700 text-center text-white">
+        <select
+          onChange={(e) => handleChangeCategory(e)}
+          className="h-8 w-40 rounded-lg bg-gray-700 text-center text-white"
+        >
           <option disabled value="default">
             Choose category
           </option>
